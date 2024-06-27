@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+  <style>
+     body {
+      font-family: Arial, sans-serif;
+      background-color: #62077d;
+    }
+   .dashboard {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 20px;
+    }
+   .parameter {
+      width: 20%;
+      margin: 20px;
+      padding: 20px;
+      border: 1px solid #8b1b1b;
+      border-radius: 10px;
+      background-color: #ffe603;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+   .parameter h2 {
+      margin-top: 0;
+    }
+   .chart {
+      width: 40%;
+      margin: 20px;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+   .chart canvas {
+      width: 100%;
+      height: 300px;
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <div class="parameter">
+      <h2>pH Level</h2>
+      <p id="pH-level">7.0</p>
+    </div>
+    <div class="parameter">
+      <h2>Ambient Temperature</h2>
+      <p id="ambient-temperature">22°C</p>
+    </div>
+    <div class="parameter">
+      <h2>Relative Humidity</h2>
+      <p id="relative-humidity">60%</p>
+    </div>
+    <div class="parameter">
+      <h2>Ambient Lighting Intensity</h2>
+      <p id="ambient-lighting-intensity">500 lux</p>
+    </div>
+    <div class="parameter">
+      <h2>EC Level</h2>
+      <p id="ec-level">1.5 mS/cm</p>
+    </div>
+  </div>
+
+  <script>
+
+    fetch('/api/sensor-data')
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('pH-level').innerHTML = data.pH;
+        document.getElementById('ambient-temperature').innerHTML = data.temperature;
+        document.getElementById('relative-humidity').innerHTML = data.humidity;
+        document.getElementById('ambient-lighting-intensity').innerHTML = data.lightingIntensity;
+        document.getElementById('ec-level').innerHTML = data.ec;
+      });
+  </script>
+</body>
+</html>

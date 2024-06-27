@@ -1,0 +1,11 @@
+from flask import Flask, jsonify
+
+app = Flask(__name__)
+
+# Import your Python function that generates the data
+from your_python_file import your_python_function
+
+@app.route('/data', methods=['GET'])
+def get_data():
+    data = your_python_function()
+    return jsonify({'data': data})
